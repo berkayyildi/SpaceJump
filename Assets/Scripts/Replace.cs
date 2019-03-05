@@ -24,7 +24,7 @@ public class Replace : MonoBehaviour
                 }
 
             }
-            col.gameObject.transform.position = new Vector2(Random.Range(-2.5f, 1.8f), maxY+ Random.Range(1.0f, 1.5f));
+            col.gameObject.transform.position = new Vector2(Random.Range(-2.5f, 1.8f), maxY+ Random.Range(0.7f, 1.3f));
         }
     }
 
