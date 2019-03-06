@@ -22,23 +22,35 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        if (player.transform.position.y > maxHeight)
+        float playerHeight = player.transform.position.y;   //Oyuncunun Yüksekliği
+
+        if (playerHeight > maxHeight)   //Oyuncu Yüksekliği oyuncunun oyun içinde ulaştığı max yükseklikten büyükse
         {
-            maxHeight = player.transform.position.y;
-            changeScore();
+            maxHeight = playerHeight;
+            text.text = "Score: " + Mathf.RoundToInt(maxHeight * 10.0f);    //Sağ üst kösedeki skoru güncelle
         }
-        else if (player.transform.position.y <  maxHeight - 20.0f && isFall==false)
+        else if (playerHeight <  maxHeight - 20.0f && isFall==false)    //Oyuncu Max height den 20 birim aşağı düştüyse
         {
             isFall = true;
-            Debug.Log("sa");
+
+           
+            float MaxScore = maxHeight * 10;
+
+            if (MaxScore > PlayerPrefs.GetFloat("MaxScore",0)) {    //Skor Kırıldıysa
+                Debug.Log("MaxScore:" + MaxScore + " Saved");
+                PlayerPrefs.SetFloat("MaxScore", MaxScore);
+            }
+            else
+            {
+                Debug.Log("MaxScore Kırılamadı Max Skor:" + PlayerPrefs.GetFloat("MaxScore", 0) + " , Sizin Skor:" + MaxScore);
+            }
+
+            int[] testarray = new int[] { 1, 3, 5, 7, 9 };
+            PlayerPrefsX.SetIntArray("Numbers", testarray);
+
         }
         edgeMove();
 
-    }
-
-    private void changeScore()
-    {
-        text.text = "Score: " + Mathf.RoundToInt(maxHeight*10.0f); 
     }
 
 
